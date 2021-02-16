@@ -66,6 +66,20 @@ public class Start extends JFrame {
    JLabel stat2 = new JLabel(DEX_string);
    JLabel stat3 = new JLabel(INT_string);
 
+   
+   JLabel name_component = new JLabel(name);
+   JLabel level_component = new JLabel(level);
+    JLabel exp_component = new JLabel(exp);
+    JLabel slash1 = new JLabel("/");
+    JLabel maxexp_component = new JLabel(max_exp);
+    JLabel hp_component = new JLabel(hp);
+    JLabel slash2 = new JLabel("/");
+   JLabel maxhp_component = new JLabel(max_hp);
+   JLabel leftstat_component = new JLabel(left_stat);
+   
+   
+   
+   
    JLabel wearing_weapon = new JLabel("( +10 )");
    boolean wearing_sword = false;
    boolean wearing_bow = false;
@@ -153,7 +167,7 @@ public class Start extends JFrame {
    private JButton fight4Button;
    private JButton fight5Button;
 
-
+ImageIcon power = new ImageIcon(Main.class.getResource("power.png"));
 
    private int mouseX, mouseY;
    
@@ -163,6 +177,13 @@ public class Start extends JFrame {
 
    Clip clip = null;
 
+   
+   
+   boolean now_power_click = false;
+   
+   
+   
+   
    public Start() {
 
 	  
@@ -263,10 +284,27 @@ public class Start extends JFrame {
       menuBar.setBounds(0, 0, 626, 20);
       menuBar.addMouseListener(new MouseAdapter() {
 
-         public void mouseEntered(MouseEvent e) {
+         public void mouseEntered(MouseEvent e) {////////////////////////////////////////////////////////////////////////
 
-            fightButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-            if (item.sword.wear == true) {
+        	 if(item.now_power == true) { // 강화버튼을 눌렀을 경우
+        		
+        		 if( now_power_click  == false) {
+        			    power = imageSetSize(power, 626, 375);
+                        background = new ImageIcon(Main.class.getResource("power.png")).getImage();
+                        
+                        
+                        
+        		 exitMain(name_component, slash1, slash2, level_component, exp_component,
+                         maxexp_component, hp_component, maxhp_component, leftstat_component, stat1,
+                         stat2, stat3);
+       
+                   //new INV();
+                   }
+                   now_power_click = true;
+        	 }
+        	 
+            //fightButton.setCursor(new Cursor(Cursor.HAND_CURSOR)); --- 지워도 되는거
+        	 else if (item.sword.wear == true) {
 
                if (wearing_sword == false) {
                   STR += bonus;
@@ -440,7 +478,7 @@ public class Start extends JFrame {
                background = new ImageIcon(Main.class.getResource("center.png")).getImage();
             }
 
-         }
+         }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
          @Override
          public void mousePressed(MouseEvent e) {
@@ -767,7 +805,9 @@ public class Start extends JFrame {
 
                      }
 
-                  
+                     backMain(name_component, slash1, slash2, level_component, exp_component,
+                             maxexp_component, hp_component, maxhp_component, leftstat_component,
+                             stat1, stat2, stat3);
 
                
 
@@ -782,6 +822,7 @@ public class Start extends JFrame {
                      fightButton.addMouseListener(new MouseAdapter() {
                         public void mouseEntered(MouseEvent e) {
                            fightButton.setIcon(fightClick);
+                           fightButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
                         }
 
                         public void mouseExited(MouseEvent e) {
@@ -1317,6 +1358,9 @@ public class Start extends JFrame {
                            exitMain(name_component, slash1, slash2, level_component, exp_component,
                                  maxexp_component, hp_component, maxhp_component, leftstat_component, stat1,
                                  stat2, stat3);
+                           power = imageSetSize(power, 626, 375);
+                           background = new ImageIcon(Main.class.getResource("power.png")).getImage();
+                           new INV();
                            // ImageIcon back = new ImageIcon(Main.class.getResource("up1화면.png"));
                            // back = imageSetSize(back, 626, 375);
 
