@@ -181,6 +181,32 @@ ImageIcon power = new ImageIcon(Main.class.getResource("power.png"));
    
    boolean now_power_click = false;
    
+   //////////////////////////////////////////////////////////////////////////////////아이템 그림들
+   private ImageIcon sw = new ImageIcon(Main.class.getResource("sword.png"));
+   private ImageIcon bo = new ImageIcon(Main.class.getResource("bow.png"));
+   private ImageIcon wa = new ImageIcon(Main.class.getResource("wand.png"));
+   private ImageIcon on = new ImageIcon(Main.class.getResource("clo.png"));
+   private ImageIcon sh = new ImageIcon(Main.class.getResource("shoes.png"));
+   private ImageIcon m1 = new ImageIcon(Main.class.getResource("Mat1.png"));
+   private ImageIcon m2 = new ImageIcon(Main.class.getResource("Mat2.png"));
+   private ImageIcon m3 = new ImageIcon(Main.class.getResource("Mat3.png"));
+   private ImageIcon m4 = new ImageIcon(Main.class.getResource("Mat4.png"));
+   private ImageIcon m5 = new ImageIcon(Main.class.getResource("Mat5.png"));
+   private ImageIcon inven = new ImageIcon(Main.class.getResource("invc.jpg"));
+   
+   
+   private ImageIcon powerButtonImage = new ImageIcon(Main.class.getResource("powerbutton.png"));
+   private ImageIcon powerButtonClickImage = new ImageIcon(Main.class.getResource("powerbuttonClick.png"));
+   JButton pmat = new JButton();
+   JButton pitem = new JButton();
+   JLabel power_percent = new JLabel("100%");
+   JButton powerButton = new JButton();
+
+   private ImageIcon back = new ImageIcon(Main.class.getResource("back.png"));
+   private ImageIcon back_click = new ImageIcon(Main.class.getResource("back_click.png"));
+   JButton backback = new JButton();
+   
+   JPanel power_item = new JPanel();
    
    
    
@@ -292,8 +318,7 @@ ImageIcon power = new ImageIcon(Main.class.getResource("power.png"));
         			    power = imageSetSize(power, 626, 375);
                         background = new ImageIcon(Main.class.getResource("power.png")).getImage();
                         
-                        
-                        
+                      
         		 exitMain(name_component, slash1, slash2, level_component, exp_component,
                          maxexp_component, hp_component, maxhp_component, leftstat_component, stat1,
                          stat2, stat3);
@@ -301,6 +326,119 @@ ImageIcon power = new ImageIcon(Main.class.getResource("power.png"));
                    //new INV();
                    }
                    now_power_click = true;
+                   
+                   if(item.sword.now_power == true) {
+                	 
+                	  pitem .setBorderPainted(false);
+                	  pitem .setContentAreaFilled(false);
+                	  pitem .setFocusPainted(false);
+                      
+                	  sw =imageSetSize(sw,35,35);
+                	  pitem.setIcon(sw);
+                	  
+                	   pitem.setBounds(180,175,35,35);
+                	   pitem.setVisible(true);
+                	   add(pitem);
+                	                  
+                   }
+                   
+                   if(item.mat1.use == true) {
+                	   
+                 	  
+                	   pmat .setBorderPainted(false);
+                	   pmat .setContentAreaFilled(false);
+                	   pmat .setFocusPainted(false);
+                       
+                 	  m1 =imageSetSize(m1,35,35);
+                 	 pmat.setIcon(m1);
+                 	  
+                 	pmat.setBounds(415,175,35,35);
+                 	pmat.setVisible(true);
+                 	   add(pmat);
+                 	   
+                 	  
+                 	   power_percent.setForeground(Color.white);
+                 	   power_percent.setBounds(300,250,50,30);
+                 	   add(power_percent);
+                 	   
+            		 
+            		   powerButton .setBorderPainted(false);
+            		   powerButton .setContentAreaFilled(false);
+            		   powerButton .setFocusPainted(false);
+            		   powerButtonImage = imageSetSize( powerButtonImage,150,44);
+            		   powerButton.setIcon(powerButtonImage);
+            		   powerButton.setBounds(240,310,150,44);
+            		   powerButton.setVisible(true);
+            		   
+            		   powerButton.addMouseListener(new MouseAdapter() {
+           	            public void mouseEntered(MouseEvent e) {
+           	            	powerButtonClickImage = imageSetSize( powerButtonClickImage,150,42);
+           	            	powerButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+           	            	powerButton.setIcon( powerButtonClickImage);
+           	            }
+
+           	            public void mouseExited(MouseEvent e) {
+           	            	powerButton.setIcon( powerButtonImage);
+           	            	powerButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+           	            }
+
+           	            public void mousePressed(MouseEvent e) {
+           	 ////강화시작!
+           	            	background = new ImageIcon(Main.class.getResource("after_power.png")).getImage();
+           	            	JLabel powerEffect = new JLabel();
+           	            	ImageIcon pef = new ImageIcon(this.getClass().getResource("effect.gif"));
+           	            	//pef = imageSetSize( pef,300,300);
+           	            	powerEffect.setIcon(pef);
+           	            
+           	            	powerEffect.setBounds(90,15,352,285);
+           	            	powerEffect.setVisible(true);
+           	            	add(powerEffect);
+           	            	
+           	            	pitem.setVisible(false);
+           	            	pmat.setVisible(false);
+           	            	power_percent.setVisible(false);
+           	            	powerButton.setVisible(false);
+           	             
+           	            	JLabel suc = new JLabel("강화 성공");
+           	             suc.setForeground(Color.white);
+           	          suc.setBounds(150,230,50,30);
+           	          suc.setVisible(true);
+                   	   add( suc);
+                   	   
+                   	   back = imageSetSize(back,150,42);
+                   	   back_click =  imageSetSize(back_click,150,44);
+                   	   backback.setIcon(back);
+                   	   backback.setBounds(240,300,150,42);
+                   	backback .setBorderPainted(false);
+                   	backback .setContentAreaFilled(false);
+                   	backback .setFocusPainted(false);
+                   	   
+                   	   
+                   	 backback.addMouseListener(new MouseAdapter() {
+         	            public void mouseEntered(MouseEvent e) {
+         	            	backback.setIcon( back_click);
+         	            	backback.setCursor(new Cursor(Cursor.HAND_CURSOR));
+         	            }
+
+         	            public void mouseExited(MouseEvent e) {
+         	            	backback.setIcon( back);
+         	            	backback.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+         	            }
+
+         	            public void mousePressed(MouseEvent e) {
+         	   
+         	  backback.setVisible(false);}
+         	      });
+                   	   
+                   	add(backback);   	
+           	            	
+           	            }
+           	      });
+            		   
+                       add(powerButton);
+            	   }
+                   
+                   
         	 }
         	 
             //fightButton.setCursor(new Cursor(Cursor.HAND_CURSOR)); --- 지워도 되는거
@@ -442,7 +580,7 @@ ImageIcon power = new ImageIcon(Main.class.getResource("power.png"));
 
             }
 
-            if (item.sword.wear == false && item.wand.wear == false && item.bow.wear == false && IScenter == true) {
+            else if (item.sword.wear == false && item.wand.wear == false && item.bow.wear == false && IScenter == true) {
 
                weapon_wearing = false;
                if (wearing_sword == true) // 다른 무기를 착용했던 경우
