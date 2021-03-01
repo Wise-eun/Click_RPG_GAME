@@ -119,6 +119,7 @@ JButton button4 = new JButton("사용");
 	            }
 
 	            public void mousePressed(MouseEvent e) {
+	            	item.sword.now_power = true;
 	            	item.now_power = true;
 	                dispose();
 	            }
@@ -526,7 +527,7 @@ JButton button4 = new JButton("사용");
 	            }
 
 	            public void mousePressed(MouseEvent e) {
-	   
+	   item.mat1.use=true;
 	              button4.setVisible(false);}
 	      });
 
@@ -596,7 +597,118 @@ JButton button4 = new JButton("사용");
 
 	      }
 	 
-	 
+	 if(n==10) {
+		 //////////////////////////////////////////////////////강화검
+
+	      if(item.sword1.wear == false) {
+	    	  button1.setVisible(true);
+             button2.setVisible(false);
+             button3.setVisible(true);
+             
+            }
+            
+	      else if(item.now_power == true) {
+	    	  button1.setVisible(false);
+             button2.setVisible(false);
+	    	  
+	      }
+            else  {
+           	 button1.setVisible(false);
+                button2.setVisible(true);
+                button3.setVisible(false);
+	             }
+
+           
+	
+	
+	      button1.addMouseListener(new MouseAdapter() {
+	            public void mouseEntered(MouseEvent e) {
+	            
+	            	button1.setCursor(new Cursor(Cursor.HAND_CURSOR));
+	            }
+
+	            public void mouseExited(MouseEvent e) {
+	               
+	            	button1.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+	            }
+
+	            public void mousePressed(MouseEvent e) {
+	            	
+	            	
+	              item.sword1.wear = true;
+	              item.sword.wear = false;
+	              item.bow.wear = false;
+	              item.wand.wear = false;
+
+	          
+	              button1.setVisible(false);
+	              button2.setVisible(true);
+	              
+	            dispose();
+	            
+	            
+	            }
+	             
+	   
+	         });
+	      
+	      button2.addMouseListener(new MouseAdapter() {
+	            public void mouseEntered(MouseEvent e) {
+	            
+	            	button2.setCursor(new Cursor(Cursor.HAND_CURSOR));
+	            }
+
+	            public void mouseExited(MouseEvent e) {
+	               
+	            	button2.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+	            }
+
+	            public void mousePressed(MouseEvent e) {
+	              item.sword1.wear = false;
+	              button2.setVisible(false);
+	              button1.setVisible(true);
+	              dispose();
+
+	            }
+
+	         });
+	      
+	      button3.addMouseListener(new MouseAdapter() {
+	            public void mouseEntered(MouseEvent e) {
+	            
+	            	button3.setCursor(new Cursor(Cursor.HAND_CURSOR));
+	            }
+
+	            public void mouseExited(MouseEvent e) {
+	               
+	            	button3.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+	            }
+
+	            public void mousePressed(MouseEvent e) {
+	            	item.sword1.now_power = true;
+	            	item.now_power = true;
+	                dispose();
+	            }
+
+	         });
+	      
+	      JLabel NewLabel = new JLabel("개수 : "+item.sword1.n +"개");
+	         //NewWindowContainer.add(NewLabel);
+	          NewLabel.setBounds(290, 50, 40, 30);
+	          add(NewLabel);
+	     
+
+	      setSize(300, 100);
+	      setResizable(false);
+	      setVisible(true);
+	      
+	      
+	  	add(button1);
+	  	add(button2);
+	  	add(button3);
+	      
+
+	      }
 	 
 
 

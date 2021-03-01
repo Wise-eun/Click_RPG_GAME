@@ -19,6 +19,7 @@ public class INV extends JFrame {
    public static ItemButton itBtn;
    public static SharedItem item = new SharedItem();
    private ImageIcon sw = new ImageIcon(Main.class.getResource("sword.png"));
+   private ImageIcon sw1 = new ImageIcon(Main.class.getResource("sword1.png"));
    private ImageIcon bo = new ImageIcon(Main.class.getResource("bow.png"));
    private ImageIcon wa = new ImageIcon(Main.class.getResource("wand.png"));
    private ImageIcon on = new ImageIcon(Main.class.getResource("clo.png"));
@@ -38,7 +39,7 @@ public class INV extends JFrame {
 
       
       JPanel p = new JPanel();
-      p.setBackground(Color.gray);
+      p.setBackground(Color.black);
       p.setSize(new Dimension(400, 500));
       p.setLayout(new GridLayout(8, 5));
 
@@ -376,6 +377,41 @@ public class INV extends JFrame {
          }
 
       }
+      
+      if (item.sword1.Exist == true) {
+    	  //button[10].setBorderPainted(false);
+    	  button[10].setContentAreaFilled(false);
+    	  //button[10].setFocusPainted(false);
+   
+          button[10].addMouseListener(new MouseAdapter() {
+             public void mouseEntered(MouseEvent e) {
+
+                button[10].setCursor(new Cursor(Cursor.HAND_CURSOR));
+             }
+
+             public void mouseExited(MouseEvent e) {
+
+                button[10].setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+             }
+
+             public void mousePressed(MouseEvent e) {
+                itBtn = new ItemButton(item, 10);
+                item.sword1 = itBtn.item.sword1;
+
+             }
+
+          });
+
+          if (item.sword1.init == true) {
+             button[10].setIcon(sw1);
+             item.sword1.n = 1;
+             item.sword1.init = false;
+          } else {
+             button[10].setIcon(sw1);
+
+          }
+
+       }
 
       ItemButton.item = item;
       frame.add(p);

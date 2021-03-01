@@ -81,14 +81,15 @@ public class Start extends JFrame {
    
    
    JLabel wearing_weapon = new JLabel("( +10 )");
+   JLabel wearing_weapon2 = new JLabel("( +40 )");
    boolean wearing_sword = false;
    boolean wearing_bow = false;
    boolean wearing_wand = false;
-
+   boolean wearing_sword1 = false;
 /////////////////////////////////////////
    private Image screenImage;
    private Graphics screenGraphic;
-
+private ImageIcon sword1wearing =  new ImageIcon(Main.class.getResource("sw1in.png"));
    Image background = new ImageIcon(getClass().getResource("forest.png")).getImage();
    private JLabel menuBar = new JLabel(new ImageIcon(Main.class.getResource("upbar.png")));
 
@@ -322,7 +323,7 @@ ImageIcon power = new ImageIcon(Main.class.getResource("power.png"));
         		 exitMain(name_component, slash1, slash2, level_component, exp_component,
                          maxexp_component, hp_component, maxhp_component, leftstat_component, stat1,
                          stat2, stat3);
-       
+        		 item.now_power = false;
                    //new INV();
                    }
                    now_power_click = true;
@@ -344,7 +345,6 @@ ImageIcon power = new ImageIcon(Main.class.getResource("power.png"));
                    
                    if(item.mat1.use == true) {
                 	   
-                 	  
                 	   pmat .setBorderPainted(false);
                 	   pmat .setContentAreaFilled(false);
                 	   pmat .setFocusPainted(false);
@@ -391,19 +391,33 @@ ImageIcon power = new ImageIcon(Main.class.getResource("power.png"));
            	            	powerEffect.setIcon(pef);
            	            
            	            	powerEffect.setBounds(90,15,352,285);
-           	            	powerEffect.setVisible(true);
+           	            	powerEffect.setVisible(true);   	
            	            	add(powerEffect);
            	            	
+
            	            	pitem.setVisible(false);
            	            	pmat.setVisible(false);
            	            	power_percent.setVisible(false);
            	            	powerButton.setVisible(false);
            	             
+           	            	
+           	            
+								
+           	             //Effect effect_Thread = new Effect();
+           	            		
+           	            	//powerEffect.setVisible(false);
+							
+							
+								
+           	            	backback.setVisible(false);
+                          
+                           	backback.setVisible(true);
+           	            	
            	            	JLabel suc = new JLabel("강화 성공");
            	             suc.setForeground(Color.white);
-           	          suc.setBounds(150,230,50,30);
+           	          suc.setBounds(250,230,60,30);
            	          suc.setVisible(true);
-                   	   add( suc);
+                   	   add(suc);
                    	   
                    	   back = imageSetSize(back,150,42);
                    	   back_click =  imageSetSize(back_click,150,44);
@@ -418,6 +432,7 @@ ImageIcon power = new ImageIcon(Main.class.getResource("power.png"));
          	            public void mouseEntered(MouseEvent e) {
          	            	backback.setIcon( back_click);
          	            	backback.setCursor(new Cursor(Cursor.HAND_CURSOR));
+         	            	
          	            }
 
          	            public void mouseExited(MouseEvent e) {
@@ -426,11 +441,36 @@ ImageIcon power = new ImageIcon(Main.class.getResource("power.png"));
          	            }
 
          	            public void mousePressed(MouseEvent e) {
-         	   
-         	  backback.setVisible(false);}
+         	  
+         	         ////////////////////////////////////////////////////////강화끝!  
+         	            	item.now_power = false;
+         	  backback.setVisible(false);
+
+       	   item.mat1.use = false;
+         	 backMain(name_component, slash1, slash2, level_component, exp_component,
+                     maxexp_component, hp_component, maxhp_component, leftstat_component,
+                     stat1, stat2, stat3);
+         	add(stat1);
+         	powerEffect.setVisible(false);
+         	suc.setVisible(false);
+         	item.sword1.Exist= true;
+         	 sword1wearing = imageSetSize(sword1wearing, 626, 375);
+         			 item.mat1.n--;
+         			 item.sword.n--;
+         	item.sword1.n++;
+         	
+        
+         	 
+         	            }
          	      });
-                   	   
-                   	add(backback);   	
+                   	now_power_click = false;
+                   	item.sword.now_power = false;
+                   	item.mat1.use = false;
+                   	 
+                   	 
+                 	 
+                   	add(backback); 
+                	
            	            	
            	            }
            	      });
@@ -442,6 +482,65 @@ ImageIcon power = new ImageIcon(Main.class.getResource("power.png"));
         	 }
         	 
             //fightButton.setCursor(new Cursor(Cursor.HAND_CURSOR)); --- 지워도 되는거
+        	 
+        	 
+        	 
+        	 else if (item.sword1.wear == true) {
+
+        		 if (wearing_sword1 == false) {
+                     STR += item.sword1.STR;
+
+                     STR_string = Integer.toString(STR);
+                     stat1.setText(STR_string);
+                     add(stat1);
+
+                  }
+        		 
+                 if (wearing_sword == true) {
+                    STR -= bonus;
+
+                    STR_string = Integer.toString(STR);
+                    stat1.setText(STR_string);
+                    add(stat1);
+
+                 }
+                 
+                 
+                 if (wearing_bow == true) // 다른 무기를 착용했던 경우 --> 검으로 무기교체
+                 {
+                    wearing_bow = false;
+                    DEX -= bonus;
+
+                    DEX_string = Integer.toString(DEX);
+                    stat2.setText(DEX_string);
+
+                 }
+
+                 if (wearing_wand == true) // 다른 무기를 착용했던 경우 --> 검으로 무기교체
+                 {
+                    wearing_wand = false;
+                    INT -= bonus;
+
+                    INT_string = Integer.toString(INT);
+                    stat3.setText(INT_string);
+
+                 }
+
+                 background=  sword1wearing.getImage();
+                 wearing_sword1 = true;
+
+                 wearing_weapon2.setVisible(true);// 추가된 능력치 보여줌
+                 wearing_weapon2.setBounds(300, 215, 50, 50);
+                 wearing_weapon2.setForeground(Color.red);
+
+                 add(stat1);
+                 add(wearing_weapon2);
+
+                 weapon_wearing = true;
+
+              }
+        	 
+        	 
         	 else if (item.sword.wear == true) {
 
                if (wearing_sword == false) {
@@ -526,6 +625,9 @@ ImageIcon power = new ImageIcon(Main.class.getResource("power.png"));
                wearing_weapon.setBounds(300, 240, 50, 50);
                wearing_weapon.setForeground(Color.red);
 
+               
+               
+               
                add(wearing_weapon);
 
                change = imageSetSize(change, 626, 375);
@@ -1458,31 +1560,7 @@ ImageIcon power = new ImageIcon(Main.class.getResource("power.png"));
                         public void mouseEntered(MouseEvent e) {
                            updateButton.setIcon(updateClick);
                            updateButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-                           if (item.sword.wear == true) {
-
-                              ImageIcon change = new ImageIcon(Main.class.getResource("swin.png"));
-                              change = imageSetSize(change, 626, 375);
-
-                              background = change.getImage();
-
-                           }
-
-                           else if (item.bow.wear == true) {
-                              ImageIcon change = new ImageIcon(Main.class.getResource("bowin.png"));
-                              change = imageSetSize(change, 626, 375);
-
-                              background = change.getImage();
-
-                           } else if (item.wand.wear == true) {
-                              ImageIcon change = new ImageIcon(Main.class.getResource("wandin.png"));
-                              change = imageSetSize(change, 626, 375);
-
-                              background = change.getImage();
-
-                           }
-                           if (item.sword.wear == false && item.wand.wear == false && item.bow.wear == false)
-                              background = new ImageIcon(Main.class.getResource("center.png"))
-                                    .getImage();
+                        
                         }
 
                         public void mouseExited(MouseEvent e) {
